@@ -121,6 +121,9 @@ public class HelloWorld {
 
 ```
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'HelloWorld'
 ```
 
 5. On the root folder of your project, build the source using Gradle:
@@ -132,11 +135,96 @@ BUILD SUCCESSFUL in 2s
 2 actionable tasks: 2 executed
 ```
 
-A new folder `build/libs` has been created containing the `jar` file of your project:
+A new folder `build/libs` has been created containing the `jar` file of your project.
+
+## Gradle Wrapper
+
+The Gradle wrapper is the best way to start building and running your projects. Let's learn how it works:
+
+1. Go to your root folder `JavaTest` and run:
 
 ```bash
-ls build/libs
-  JavaTest.jar
+gradle wrapper
 ```
 
+You'll notice a few new files in your root folder. You can freely add them to your
+version control system so everyone can build it just the same way.
 
+2. Build the source code using the wrapper:
+
+```bash
+./gradlew build
+
+BUILD SUCCESSFUL in 4s
+2 actionable tasks: 2 up-to-date
+```
+
+3. And finally execute it:
+
+```bash
+./gradlew run
+
+Hello world
+```
+
+# Integrating Amadeus SDK
+
+So far we have built a very simple piece of code. Let's do something cool by
+calling one of our [APIs](https://developers.amadeus.com) from your Java code.
+
+According to our [Java SDK](https://github.com/amadeus4dev/amadeus-java) documentation, we need to update our `build.gradle` file to include the following dependencies:
+
+```
+compile 'com.google.code.gson:gson:2.8.5'
+compile "com.amadeus:amadeus-java:1.1.2"
+```
+
+Our new `build.gradle` will look like:
+
+```
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile 'com.amadeus:amadeus-java:1.1.2'
+}
+
+repositories { maven { url "https://jcenter.bintray.com" } }
+
+jar {
+    baseName = 'amadeusExample'
+    version =  '0.1.0'
+}
+
+mainClassName = 'AmadeusExample'
+```
+
+Replace the previously created `HelloWorld.java` with the file `AmadeusExample.java`:
+
+```java
+import com.amadeus.Amadeus;
+import com.amadeus.Params;
+
+import com.amadeus.exceptions.ResponseException;
+
+import com.amadeus.referenceData.Airlines;
+import com.amadeus.resources.Airline;
+
+public class AmadeusExample {
+  public static void main(String[] args) throws ResponseException {
+    Amadeus amadeus = Amadeus
+            .builder("YOU_CLIENT_ID","YOUR_CLIENT_SECRET")
+            .build();
+
+    Airline[] airlines = amadeus.referenceData.airlines.get(Params
+      .with("IATACode", "BA")
+      .and("ICAOCode", "AIC"));
+
+    System.out.println(airlines[0]);
+  }
+}
+```
