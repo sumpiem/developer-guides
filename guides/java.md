@@ -5,7 +5,7 @@ set of tools -virtual machine, compiler and libraries- which allow developers
 to create cross-platform applications under the concept of *write once, run
 anywhere*.
 
-Despite the complexity of the Java ecosystem, it's important to understant that
+Despite the complexity of the Java ecosystem, it's important to understand that
 there is only one set of source code for the JDK released under GPL license and
 hosted at [OpenJDK](http://openjdk.java.net/projects/jdk/). You can follow
 [these
@@ -13,7 +13,7 @@ instructions](http://hg.openjdk.java.net/jdk9/jdk9/raw-file/tip/common/doc/build
 to compile and generate your own JDK flavour.
 
 Although it sounds scary, is surprisingly easy and takes less than 1 hour! But
-that's not the pourpose of this tutorial, so downloading a build seems like a
+that's not the purpose of this tutorial, so downloading a build seems like a
 good idea.
 
 # OpenJDK? Oracle JDK? help!
@@ -21,7 +21,7 @@ good idea.
 Different vendors build the OpenJDK adding additional tools, utilities or
 branding elements, but never modifing the language. As result the vendor
 provides a new build with some unique vendor capabilities or certification
-processes. 
+processeses. 
 
 There are many JDK implementations, but the most used ones are:
 
@@ -70,10 +70,10 @@ will give us a better understanding about what's going on beneath any IDE.
 
 There are several tools which
 makes us life eaiser. The most interesting ones are
-[Gradle](https://gradle.org/) and [maven](https://maven.apache.org/).
+[Gradle](https://gradle.org/) and [Maven](https://maven.apache.org/).
 
 Although our [Java SDK](https://github.com/amadeus4dev/amadeus-java) supports
-both `Gradle` and `maven`, for our example we are going to use `Gradle`. Let's
+both `Gradle` and `Maven`, for our example we are going to use `Gradle`. Let's
 see how it works.
 
 ## Installing Gradle
@@ -131,7 +131,7 @@ gradle init
 You'll notice a few new files in your root folder. You can freely add them to your
 version control system so everyone can build it just the same way.
 
-4. Edit the `build.gradle` file with your favourite editor and add:
+5. Edit the `build.gradle` file with your favourite editor and add:
 
 ```
 apply plugin: 'java'
@@ -142,7 +142,7 @@ mainClassName = 'hello.HelloWorld'
 
 > Note that mainClassName must be fully qualified class name.
 
-5. Let's build the source using the `gradlew` wrapper script that Gradle has just created:
+6. Let's build the source using the `gradlew` wrapper script that Gradle has just created:
 
 ```bash
 ./gradlew build
@@ -159,7 +159,7 @@ configure tasks on [Gradle documentation](https://guides.gradle.org/).
 
 A new folder `build/libs` has been created containing the `jar` file of your project.
 
-6. And finally let's run it:
+7. And finally let's run it:
 
 ```bash
 ./gradlew run
@@ -245,7 +245,7 @@ public class AmadeusExample {
 
 The sample calls [Flight Inspiration Search
 API](https://developers.amadeus.com/self-service/category/203/api-doc/3) in
-order to retrieve best offers departuring Madrid. 
+order to retrieve best offers departing Madrid. 
 
 Finally, let's execute the sample:
 
@@ -260,7 +260,7 @@ FlightDestination(type=flight-destination, origin=MAD, destination=BIO, departur
 # What's next?
 
 During this tutorial we have learnt how to set up a Java project from scratch and how to make a
-first API call using the Amadeus Java SDK. But the posibilites are huge given
+first API call using the Amadeus Java SDK. But the possibilities are huge given
 the rich Java ecosystem (Android, web or console applications). Let your imagination fly!
 
 
